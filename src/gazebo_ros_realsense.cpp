@@ -95,8 +95,10 @@ void GazeboRosRealsense::OnNewFrame(const rendering::CameraPtr    cam,
 
   // set image encoding
   const std::map<std::string, std::string> supported_image_encodings = {
-    { "RGB_INT8", sensor_msgs::image_encodings::RGB8                        },
-    { "L_INT8",   sensor_msgs::image_encodings::TYPE_8UC1                   }
+    { "RGB_INT8",
+      sensor_msgs::image_encodings::RGB8                              },
+    { "L_INT8",
+      sensor_msgs::image_encodings::TYPE_8UC1                          }
   };
   const auto pixel_format = supported_image_encodings.at(cam->ImageFormat());
 
@@ -273,7 +275,10 @@ void GazeboRosRealsense::OnNewDepthFrame()
                          this->depthCam->ImageWidth(),
                          2 * this->depthCam->ImageWidth(),
                          (void *)this->depthCam->DepthData());
+
+
     this->pointcloud_pub_.publish(this->pointcloud_msg_);
+    pcl_conversions::toPCL(this->pointcloud_msg_, this->pointcloud_type);
 
     // TODO: add in the voxel filter here
   }

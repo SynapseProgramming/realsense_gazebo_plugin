@@ -15,6 +15,9 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
+#include <pcl/conversions.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/PCLPointCloud2.h>
 
 #include <memory>
 #include <string>
@@ -90,6 +93,7 @@ protected:
 
   sensor_msgs::Image image_msg_, depth_msg_;
   sensor_msgs::PointCloud2 pointcloud_msg_;
+  pcl::PCLPointCloud2 pointcloud_type;
 };
 }
 #endif /* _GAZEBO_ROS_REALSENSE_PLUGIN_ */
