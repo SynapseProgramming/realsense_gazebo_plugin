@@ -293,11 +293,13 @@ void GazeboRosRealsense::OnNewDepthFrame()
     this->sor.setInputCloud(input_pointer);
     sor.setLeafSize(0.01f, 0.01f, 0.01f);
 
-    // sor.filter(this->output_pointcloud);
+    sor.filter(this->output_pointcloud);
+
     //
     // // convert back to ros pointcloud message
-    // pcl_conversions::fromPCL(this->output_pointcloud, this->pointcloud_msg_);
-    // this->pointcloud_pub_.publish(this->pointcloud_msg_);
+    pcl_conversions::fromPCL(this->output_pointcloud, this->pointcloud_msg_);
+    this->pointcloud_pub_.publish(this->pointcloud_msg_);
+
     // replace this with applyfilter
 
     // TODO: add in the voxel filter here
