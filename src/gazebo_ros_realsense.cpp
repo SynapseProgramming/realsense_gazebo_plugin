@@ -280,7 +280,7 @@ void GazeboRosRealsense::OnNewDepthFrame()
     // TODO: replace this line with the pointcloud filtered message
     pcl_conversions::toPCL(this->pointcloud_msg_, this->input_pointcloud);
 
-    pcl::PCLPointCloud2ConstPtr test =
+    pcl::PCLPointCloud2ConstPtr input_pointer =
       boost::make_shared<pcl::PCLPointCloud2>(this->input_pointcloud);
 
     // const pcl::PCLPointCloud2ConstPtr test =
@@ -290,8 +290,9 @@ void GazeboRosRealsense::OnNewDepthFrame()
 
     // setinput cloud requries a const ptr
     // // downsampling filtering
-    // this->sor.setInputCloud(this->input_pointcloud);
-    // sor.setLeafSize(0.01f, 0.01f, 0.01f);
+    this->sor.setInputCloud(input_pointer);
+    sor.setLeafSize(0.01f, 0.01f, 0.01f);
+
     // sor.filter(this->output_pointcloud);
     //
     // // convert back to ros pointcloud message
