@@ -277,8 +277,27 @@ void GazeboRosRealsense::OnNewDepthFrame()
                          (void *)this->depthCam->DepthData());
 
 
-    this->pointcloud_pub_.publish(this->pointcloud_msg_);
-    pcl_conversions::toPCL(this->pointcloud_msg_, this->pointcloud_type);
+    // TODO: replace this line with the pointcloud filtered message
+    pcl_conversions::toPCL(this->pointcloud_msg_, this->input_pointcloud);
+
+    pcl::PCLPointCloud2ConstPtr test =
+      boost::make_shared<pcl::PCLPointCloud2>(this->input_pointcloud);
+
+    // const pcl::PCLPointCloud2ConstPtr test =
+    // boost::shared_ptr<pcl::PCLPointCloud2>(this->input_pointcloud);
+
+    // pcl::PCLPointCloud2 test = boost::shared_ptr<>;
+
+    // setinput cloud requries a const ptr
+    // // downsampling filtering
+    // this->sor.setInputCloud(this->input_pointcloud);
+    // sor.setLeafSize(0.01f, 0.01f, 0.01f);
+    // sor.filter(this->output_pointcloud);
+    //
+    // // convert back to ros pointcloud message
+    // pcl_conversions::fromPCL(this->output_pointcloud, this->pointcloud_msg_);
+    // this->pointcloud_pub_.publish(this->pointcloud_msg_);
+    // replace this with applyfilter
 
     // TODO: add in the voxel filter here
   }

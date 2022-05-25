@@ -12,12 +12,15 @@
 #include <camera_info_manager/camera_info_manager.h>
 #include <image_transport/image_transport.h>
 
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
-#include <pcl/filters/voxel_grid.h>
+#include <boost/shared_ptr.hpp>
+
+
 #include <pcl/conversions.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/PCLPointCloud2.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/filters/voxel_grid.h>
 
 #include <memory>
 #include <string>
@@ -83,6 +86,8 @@ private:
   image_transport::ImageTransport *itnode_;
   ros::Publisher pointcloud_pub_;
 
+  pcl::VoxelGrid<pcl::PCLPointCloud2>sor;
+
 protected:
 
   image_transport::CameraPublisher color_pub_, ir1_pub_, ir2_pub_, depth_pub_;
@@ -93,7 +98,8 @@ protected:
 
   sensor_msgs::Image image_msg_, depth_msg_;
   sensor_msgs::PointCloud2 pointcloud_msg_;
-  pcl::PCLPointCloud2 pointcloud_type;
+  pcl::PCLPointCloud2 input_pointcloud;
+  pcl::PCLPointCloud2 output_pointcloud;
 };
 }
 #endif /* _GAZEBO_ROS_REALSENSE_PLUGIN_ */
