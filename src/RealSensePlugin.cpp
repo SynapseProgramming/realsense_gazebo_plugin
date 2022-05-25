@@ -61,66 +61,71 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   do {
     std::string name = _sdf->GetName();
 
-    if (name == "depthUpdateRate")
-      _sdf->GetValue()->Get(depthUpdateRate_);
-    else if (name == "colorUpdateRate")
-      _sdf->GetValue()->Get(colorUpdateRate_);
-    else if (name == "infraredUpdateRate")
-      _sdf->GetValue()->Get(infraredUpdateRate_);
-    else if (name == "depthTopicName")
-      cameraParamsMap_[DEPTH_CAMERA_NAME].topic_name =
+    if (name == "depthUpdateRate") _sdf->GetValue()->Get(depthUpdateRate_);
+    else if (name == "colorUpdateRate") _sdf->GetValue()->Get(colorUpdateRate_);
+    else if (name == "infraredUpdateRate") _sdf->GetValue()->Get(
+        infraredUpdateRate_);
+    else if (name ==
+             "depthTopicName") cameraParamsMap_[DEPTH_CAMERA_NAME].topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "depthCameraInfoTopicName")
-      cameraParamsMap_[DEPTH_CAMERA_NAME].camera_info_topic_name =
+    else if (name ==
+             "depthCameraInfoTopicName") cameraParamsMap_[DEPTH_CAMERA_NAME].
+      camera_info_topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "colorTopicName")
-      cameraParamsMap_[COLOR_CAMERA_NAME].topic_name =
+    else if (name ==
+             "colorTopicName") cameraParamsMap_[COLOR_CAMERA_NAME].topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "colorCameraInfoTopicName")
-      cameraParamsMap_[COLOR_CAMERA_NAME].camera_info_topic_name =
+    else if (name ==
+             "colorCameraInfoTopicName") cameraParamsMap_[COLOR_CAMERA_NAME].
+      camera_info_topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "infrared1TopicName")
-      cameraParamsMap_[IRED1_CAMERA_NAME].topic_name =
+    else if (name ==
+             "infrared1TopicName") cameraParamsMap_[IRED1_CAMERA_NAME].
+      topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "infrared1CameraInfoTopicName")
-      cameraParamsMap_[IRED1_CAMERA_NAME].camera_info_topic_name =
+    else if (name ==
+             "infrared1CameraInfoTopicName") cameraParamsMap_[IRED1_CAMERA_NAME]
+      .
+      camera_info_topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "infrared2TopicName")
-      cameraParamsMap_[IRED2_CAMERA_NAME].topic_name =
+    else if (name ==
+             "infrared2TopicName") cameraParamsMap_[IRED2_CAMERA_NAME].
+      topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "infrared2CameraInfoTopicName")
-      cameraParamsMap_[IRED2_CAMERA_NAME].camera_info_topic_name =
+    else if (name ==
+             "infrared2CameraInfoTopicName") cameraParamsMap_[IRED2_CAMERA_NAME]
+      .
+      camera_info_topic_name =
         _sdf->GetValue()->GetAsString();
-    else if (name == "colorOpticalframeName")
-      cameraParamsMap_[COLOR_CAMERA_NAME].optical_frame =
+    else if (name ==
+             "colorOpticalframeName") cameraParamsMap_[COLOR_CAMERA_NAME].
+      optical_frame =
         _sdf->GetValue()->GetAsString();
-    else if (name == "depthOpticalframeName")
-      cameraParamsMap_[DEPTH_CAMERA_NAME].optical_frame =
+    else if (name ==
+             "depthOpticalframeName") cameraParamsMap_[DEPTH_CAMERA_NAME].
+      optical_frame =
         _sdf->GetValue()->GetAsString();
-    else if (name == "infrared1OpticalframeName")
-      cameraParamsMap_[IRED1_CAMERA_NAME].optical_frame =
+    else if (name ==
+             "infrared1OpticalframeName") cameraParamsMap_[IRED1_CAMERA_NAME].
+      optical_frame =
         _sdf->GetValue()->GetAsString();
-    else if (name == "infrared2OpticalframeName")
-      cameraParamsMap_[IRED2_CAMERA_NAME].optical_frame =
+    else if (name ==
+             "infrared2OpticalframeName") cameraParamsMap_[IRED2_CAMERA_NAME].
+      optical_frame =
         _sdf->GetValue()->GetAsString();
-    else if (name == "rangeMinDepth")
-      _sdf->GetValue()->Get(rangeMinDepth_);
-    else if (name == "rangeMaxDepth")
-      _sdf->GetValue()->Get(rangeMaxDepth_);
-    else if (name == "pointCloud")
-      _sdf->GetValue()->Get(pointCloud_);
-    else if (name == "pointCloudTopicName")
-      pointCloudTopic_ = _sdf->GetValue()->GetAsString();
-    else if (name == "pointCloudCutoff")
-      _sdf->GetValue()->Get(pointCloudCutOff_);
-    else if (name == "pointCloudCutoffMax")
-      _sdf->GetValue()->Get(pointCloudCutOffMax_);
-    else if (name == "prefix")
-      this->prefix = _sdf->GetValue()->GetAsString();
-    else if (name == "robotNamespace")
-      break;
-    else
-      throw std::runtime_error("Ivalid parameter for ReakSensePlugin");
+    else if (name == "rangeMinDepth") _sdf->GetValue()->Get(rangeMinDepth_);
+    else if (name == "rangeMaxDepth") _sdf->GetValue()->Get(rangeMaxDepth_);
+    else if (name == "pointCloud") _sdf->GetValue()->Get(pointCloud_);
+    else if (name ==
+             "pointCloudTopicName") pointCloudTopic_ =
+        _sdf->GetValue()->GetAsString();
+    else if (name ==
+             "pointCloudCutoff") _sdf->GetValue()->Get(pointCloudCutOff_);
+    else if (name == "pointCloudCutoffMax") _sdf->GetValue()->Get(
+        pointCloudCutOffMax_);
+    else if (name == "prefix") this->prefix = _sdf->GetValue()->GetAsString();
+    else if (name == "robotNamespace") break;
+    else throw std::runtime_error("Ivalid parameter for ReakSensePlugin");
 
     _sdf = _sdf->GetNextElement();
   } while (_sdf);
@@ -213,24 +218,30 @@ void RealSensePlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
                                                                    RealSensePlugin
                                                                    ::OnNewFrame,
                                                                    this,
-                                                                   this->ired1Cam,
-                                                                   this->ired1Pub));
+                                                                   this->
+                                                                   ired1Cam,
+                                                                   this->
+                                                                   ired1Pub));
 
   this->newIred2FrameConn = this->ired2Cam->ConnectNewImageFrame(std::bind(
                                                                    &
                                                                    RealSensePlugin
                                                                    ::OnNewFrame,
                                                                    this,
-                                                                   this->ired2Cam,
-                                                                   this->ired2Pub));
+                                                                   this->
+                                                                   ired2Cam,
+                                                                   this->
+                                                                   ired2Pub));
 
   this->newColorFrameConn = this->colorCam->ConnectNewImageFrame(std::bind(
                                                                    &
                                                                    RealSensePlugin
                                                                    ::OnNewFrame,
                                                                    this,
-                                                                   this->colorCam,
-                                                                   this->colorPub));
+                                                                   this->
+                                                                   colorCam,
+                                                                   this->
+                                                                   colorPub));
 
   // Listen to the update event
   this->updateConnection = event::Events::ConnectWorldUpdateBegin(
