@@ -88,7 +88,7 @@ private:
   ros::Publisher pointcloud_pub_;
 
   pcl::VoxelGrid<pcl::PCLPointCloud2>sor;
-  pcl::StatisticalOutlierRemoval<pcl::PointXYZ>statFilter;
+  pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>statFilter;
 
 protected:
 
