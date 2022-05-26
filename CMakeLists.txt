@@ -10,6 +10,8 @@ find_package(catkin REQUIRED COMPONENTS
     sensor_msgs
 )
 find_package(gazebo REQUIRED)
+find_package(PCL 1.2 REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GAZEBO_CXX_FLAGS}")
 
@@ -22,14 +24,18 @@ catkin_package(
         sensor_msgs
 )
 
+include_directories(${PCL_INCLUDE_DIRS})
 include_directories(
     include)
 include_directories(
     SYSTEM
     ${catkin_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
     ${GAZEBO_INCLUDE_DIRS}
 )
 link_directories(${GAZEBO_LIBRARY_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
 
 add_library(
     ${PROJECT_NAME}
@@ -37,7 +43,7 @@ add_library(
     src/gazebo_ros_realsense.cpp
     )
 
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${PCL_LIBRARIES} ${Boost_LIBRARIES})
 add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
 
 install(
