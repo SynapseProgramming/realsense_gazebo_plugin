@@ -18,10 +18,7 @@
 #include <pcl/conversions.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/PCLPointCloud2.h>
-#include <pcl/io/pcd_io.h>
-#include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
-#include <pcl/filters/statistical_outlier_removal.h>
 
 #include <memory>
 #include <string>
@@ -88,7 +85,6 @@ private:
   ros::Publisher pointcloud_pub_;
 
   pcl::VoxelGrid<pcl::PCLPointCloud2>sor;
-  pcl::StatisticalOutlierRemoval<pcl::PointXYZ>statFilter;
 
 protected:
 

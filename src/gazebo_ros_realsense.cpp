@@ -283,11 +283,10 @@ void GazeboRosRealsense::OnNewDepthFrame()
       boost::make_shared<pcl::PCLPointCloud2>(this->pointcloud);
 
     // voxel filtering
-    this->sor.setInputCloud(inpPclPtr);
+    sor.setInputCloud(inpPclPtr);
     sor.setLeafSize(0.04f, 0.04f, 0.04f);
     sor.filter(this->pointcloud);
 
-    // statistical filtering
 
     // convert back to ros pointcloud message
     pcl_conversions::fromPCL(this->pointcloud, this->pointcloud_msg_);
